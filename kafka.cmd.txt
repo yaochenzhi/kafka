@@ -1,0 +1,39 @@
+### KAFKA TOPIC ###
+    TOPIC CREATE
+        bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic test
+
+    TOPIC LIST
+        bin/kafka-topics.sh --list --bootstrap-server localhost:9092
+        
+    TOPIC DESC
+        bin/kafka-topics.sh --describe --bootstrap-server localhost:9092 --topic my-replicated-topic
+
+    TOPIC CONS
+        bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning
+        
+    TOPIC PROD
+        bin/kafka-console-producer.sh --broker-list localhost:9092 --topic my-replicated-topic
+
+### KAFKA MANAGER ###
+    [SETUP MANAGER]
+        CONFIG FILE
+            [ conf/application.conf ] .-> kafka-manager.zkhosts="kafka_node_0:2181, kafka_node_1:2181, kafka_node_2:2181"
+        START MANAGER
+            bin/kafka-manager
+        ADD KAFKA CLUSTER
+            add a name and config zk like what has been done in the server's [conf/application.conf].
+
+    [BUILD MANAGER]
+        git clone or wget from release of kafka-manager repo on github
+        cd repo
+        ./sbt clean dist
+        ./target/universal/kafka-manager.*.zip
+
+    # Get some refs from https://blog.csdn.net/x541211190/article/details/81191608 if needed.
+
+    
+### NOTE ###
+    Do REPLACE "localhost" with one or more of the node server names in the kafka zookeeper config file !
+
+    Any other thing works out fine ! Wait for the server response sometimes like "bin/kafka-manager" getting the topics data
+    
