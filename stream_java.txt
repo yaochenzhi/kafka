@@ -1,0 +1,17 @@
+mvn archetype:generate \
+    -DarchetypeGroupId=org.apache.kafka \
+    -DarchetypeArtifactId=streams-quickstart-java \
+    -DarchetypeVersion=2.3.0 \
+    -DgroupId=streams.examples \
+    -DartifactId=streams.examples \
+    -Dversion=0.1 \
+    -Dpackage=myapps
+    
+tree streams.examples
+
+cd streams.examples
+
+rm src/main/java/myapps/*.java
+
+>src/main/java/myapps/Pipe.java <<'eof'
+
